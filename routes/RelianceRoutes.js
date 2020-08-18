@@ -6,19 +6,17 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(/* authController.protect, */ RelianceCont.getAllData)
+  .get( /* authController.protect, */ RelianceCont.getAllData)
   .post(
-    // authController.protect,
-    // authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     RelianceCont.createData
   );
 
 router
   .route("/:id")
-  .patch(RelianceCont.updateData)
+  .patch(/* authController.protect, */ RelianceCont.updateData)
   .delete(
-    // authController.protect,
-    // authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     RelianceCont.deleteData
   );
 

@@ -4,6 +4,7 @@ const {promisify} = require('util');
 const sendEmail = require("../utils/email");
 const crypto = require("crypto");
 
+
 exports.signup = async (req, res, next) => {
     try{
         const newUser = await user.create({
@@ -59,6 +60,11 @@ exports.login = async (req, res, next) => {
         const token = jwt.sign({ id: User._id }, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_EXPIRES_IN,
         });
+        res.cookie('jwt', token, {
+          expire: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+          // secure: true,
+          httpOnly: true
+        })
         res.status(200).json({
             status: "success",
             token

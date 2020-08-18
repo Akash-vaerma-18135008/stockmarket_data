@@ -6,19 +6,17 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(authController.protect, CiplaCont.getAllData)
+  .get(/* authController.protect, */ CiplaCont.getAllData)
   .post(
-    authController.protect,
-    authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     CiplaCont.createData
   );
 
 router
   .route("/:id")
-  .patch(CiplaCont.updateData)
+  .patch(/* authController.protect, */ CiplaCont.updateData)
   .delete(
-    authController.protect,
-    authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     CiplaCont.deleteData
   );
 

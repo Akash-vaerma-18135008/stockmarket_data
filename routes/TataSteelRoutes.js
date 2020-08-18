@@ -6,19 +6,17 @@ const router = express.Router();
 
 router
   .route("/")
-  .get( TataSteelCont.getAllData)
+  .get(/* authController.protect, */ TataSteelCont.getAllData)
   .post(
-    authController.protect,
-    authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     TataSteelCont.createData
   );
 
 router
   .route("/:id")
-  .patch(TataSteelCont.updateData)
+  .patch(/* authController.protect, */ TataSteelCont.updateData)
   .delete(
-    authController.protect,
-    authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     TataSteelCont.deleteData
   );
 

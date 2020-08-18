@@ -6,19 +6,17 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(authController.protect, EichermotCont.getAllData)
+  .get(/* authController.protect, */ EichermotCont.getAllData)
   .post(
-    authController.protect,
-    authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     EichermotCont.createData
   );
 
 router
   .route("/:id")
-  .patch(EichermotCont.updateData)
+  .patch(/* authController.protect, */ EichermotCont.updateData)
   .delete(
-    authController.protect,
-    authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     EichermotCont.deleteData
   );
 

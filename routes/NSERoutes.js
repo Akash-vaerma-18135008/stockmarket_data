@@ -6,19 +6,17 @@ const router = express.Router();
 
 router
   .route("/")
-  .get( NSECont.getAllData)
+  .get(/* authController.protect, */ NSECont.getAllData)
   .post(
-    authController.protect,
-    authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     NSECont.createData
   );
 
 router
   .route("/:id")
-  .patch(NSECont.updateData)
+  .patch(/* authController.protect, */ NSECont.updateData)
   .delete(
-    authController.protect,
-    authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     NSECont.deleteData
   );
 

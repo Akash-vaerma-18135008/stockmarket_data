@@ -4,10 +4,14 @@ const   express     =   require("express"),
         fs          =   require("fs"),
         mongoose    =   require("mongoose"),
         bodyParser  =   require('body-parser')
-        csv         =   require("csvtojson");
+        csv         =   require("csvtojson"),
+        cors        =   require('cors'),
+        cookieParser = require('cookie-parser');
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 app.use(bodyParser.json());
+app.use(cors());
+app.use(cookieParser());
 
 const AshokRouter = require("./routes/AshokRoutes");
 const BSERouter = require("./routes/BSERoutes");
@@ -30,6 +34,7 @@ mongoose.connect(db, {
 
 app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
+  console.log(req.cookies);
   next();
 });
 
@@ -43,6 +48,6 @@ app.use("/api/v1/reliance", RelianceRouter);
 app.use("/api/v1/tatasteel", TataSteelRouter);
 app.use("/api/v1/users", userRouter);
 
-app.listen(process.env.PORT || 9000, function(){
+app.listen(process.env.PORT || 8000, function(){
     console.log("Server started!");
 })

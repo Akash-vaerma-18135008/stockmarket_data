@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
   .route("/")
-  .get( BSECont.getAllData)
+  .get(/* authController.protect, */ BSECont.getAllData)
   .post(
     authController.protect,
     authController.restrictTo("admin"),
@@ -15,10 +15,9 @@ router
 
 router
   .route("/:id")
-  .patch(BSECont.updateData)
+  .patch(/* authController.protect, */ BSECont.updateData)
   .delete(
-    authController.protect,
-    authController.restrictTo("admin"),
+/* authController.protect, authController.restrictTo('admin'), */
     BSECont.deleteData
   );
 
